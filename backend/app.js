@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import userRouter from "./routes/userRoutes.js";
 import cookieParser from "cookie-parser";
 import { dbConnect } from "./config/dbConnect.js";
 import { connectCloudinary } from "./config/cloudinary.js";
@@ -20,7 +21,7 @@ app.get("/", (req, res) => {
     res.send("Hello from server");
 }) 
 
-
+app.use('/api/user',userRouter)
 
 
 app.listen(port, () => {
