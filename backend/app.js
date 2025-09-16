@@ -5,6 +5,7 @@ import userRouter from "./routes/userRoutes.js";
 import cookieParser from "cookie-parser";
 import { dbConnect } from "./config/dbConnect.js";
 import { connectCloudinary } from "./config/cloudinary.js";
+import productRouter from "./routes/productRoutes.js";
 dotenv.config({quiet: true});
 
 const app = express();
@@ -22,7 +23,7 @@ app.get("/", (req, res) => {
 }) 
 
 app.use('/api/user',userRouter)
-
+app.use('/api/product',productRouter)
 
 app.listen(port, () => {
     
