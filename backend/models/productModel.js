@@ -33,8 +33,8 @@ const productSchema = new mongoose.Schema({
     type: Boolean,
   },
   date:{
-    type: Number,
-    required: true
+    type: Date,
+    default: Date.now
   }
 }, {timestamps: true});
 
