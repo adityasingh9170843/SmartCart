@@ -88,4 +88,23 @@ export const registerUser = async (req, res) => {
 
 //admin route
 
-export const adminLogin = async (req, res) => {};
+export const adminLogin = async (req, res) => {
+  try{
+    const {email,password} = req.body;
+    if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
+      let token = jwt.sign({email:process.env.ADMIN_EMAIL},process.env.JWT_SECRET,{expiresIn:"30d"});
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+      });
+      res.status(200).json({message:"Login success",token});
+    }
+    else{
+      res.status(400).json({message:"Invalid credentials"});
+    }
+  }
+  catch(error){
+    res.status(400).json({message:error.message});
+  }
+};
